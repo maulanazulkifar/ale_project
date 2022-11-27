@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -28,5 +29,25 @@ class UserController extends Controller
                 'data' => $users,
             ]
         );
+    }
+
+    public function addUser(Request $request) {
+        try {
+            DB::table('users')->insert([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'role' => $request->role
+            ]);
+            return [
+                'title' => 'Berhasil Menambah!',
+                'message' => 'Data baru sudah disimpan.'
+            ];
+        } catch (err $err) {
+            return [
+                'title' => 'Gagal Ditambahkan!',
+                'message' => $err
+            ];
+        }
     }
 }

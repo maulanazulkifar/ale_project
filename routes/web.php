@@ -24,4 +24,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('admin')->name('')->group(function () {
     Route::get('/users', [App\Http\Controllers\UserController::class, 'getAllUser'])->name('getAll');
     Route::get('/listUser', [App\Http\Controllers\UserController::class, 'getListUser'])->name('getListUser');
+    Route::post('/addUser', [\App\Http\Controllers\UserController::class, 'addUser'])->name('addUser');
 });
