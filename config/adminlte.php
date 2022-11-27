@@ -321,8 +321,8 @@ return [
 //        ],
         [
             'text'        => 'Kelola Users',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
+            'url'         => 'admin/users',
+            'icon'        => 'far fa-fw fa-user',
         ],
         ['header' => 'account_settings'],
         [
@@ -427,7 +427,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -513,7 +513,7 @@ return [
 
     'iframe' => [
         'default_tab' => [
-            'url' => url('/'),
+            'url' => env('APP_URL'),
             'title' => 'Dashboard Ale',
         ],
         'buttons' => [

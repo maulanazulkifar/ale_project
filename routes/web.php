@@ -20,3 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('admin')->name('')->group(function () {
+    Route::get('/users', function () {
+        return view('admin/users');
+    });
+});
