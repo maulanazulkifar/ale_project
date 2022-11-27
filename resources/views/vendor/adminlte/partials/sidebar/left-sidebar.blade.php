@@ -18,8 +18,33 @@
                 @if(!config('adminlte.sidebar_nav_accordion'))
                     data-accordion="false"
                 @endif>
+                @php
+                    $menu = $adminlte->menu('sidebar');
+                    $menuSuperAdmin = array();
+                    $menuKeuangan = array();
+                    $menuKasir = array();
+                    foreach($menu as $x => $val) {
+                        if ($val['isSuperAdmin'] === true) {
+                            array_push($menuSuperAdmin,$val);
+                        }
+                        if ($val['isKeuangan'] === true) {
+                            array_push($menuKeuangan,$val);
+                        }
+                        if ($val['isKasir'] === true) {
+                            array_push($menuKasir,$val);
+                        }
+                    }
+                @endphp
                 {{-- Configured sidebar links --}}
-                @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item')
+                @if(\Illuminate\Support\Facades\Auth::user()->role == 0)
+                    @each('adminlte::partials.sidebar.menu-item',$menuKasir , 'item')
+                @endif
+                @if(\Illuminate\Support\Facades\Auth::user()->role == 1)
+                    @each('adminlte::partials.sidebar.menu-item',$menuKeuangan , 'item')
+                @endif
+                @if(\Illuminate\Support\Facades\Auth::user()->role == 2)
+                    @each('adminlte::partials.sidebar.menu-item',$menuSuperAdmin , 'item')
+                @endif
             </ul>
         </nav>
     </div>
